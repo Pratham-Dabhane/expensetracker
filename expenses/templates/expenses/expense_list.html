@@ -1,0 +1,52 @@
+{% extends 'expenses/base.html' %}
+
+{% block content %}
+    <header>
+        <h1>Expense Tracker 💸</h1>
+        <a href="{% url 'expense_create' %}" class="btn">Log New Expense</a>
+    </header>
+
+    <div class="summary-cards">
+        <div class="card">
+            <h3>Total (All Time)</h3>
+            <p>${{ total_expenses|floatformat:2 }}</p>
+        </div>
+        <div class="card">
+            <h3>Last 30 Days</h3>
+            <p>${{ monthly_total|floatformat:2 }}</p>
+        </div>
+        <div class="card">
+            <h3>Last 7 Days</h3>
+            <p>${{ weekly_total|floatformat:2 }}</p>
+        </div>
+    </div>
+
+    <h2>All Expenses</h2>
+    <table class="expense-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.title }}</td>
+                <td>${{ expense.amount|floatformat:2 }}</td>
+                <td><span class="category-tag category-{{ expense.category|lower }}">{{ expense.category }}</span></td>
+                <td>{{ expense.date|date:"Y-m-d" }}</td>
+                <td>
+                    </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No expenses logged yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
