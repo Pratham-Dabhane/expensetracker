@@ -1,5 +1,5 @@
 # expenses/views.py
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Expense
 from .forms import ExpenseForm
 from django.db.models import Sum
@@ -34,3 +34,21 @@ def expense_create(request):
     else:
         form = ExpenseForm()
     return render(request, 'expenses/expense_form.html', {'form': form})
+
+def expense_update(request, pk):
+    expense = get_object_or_404(Expense, pk=pk)
+    if request.method == 'POST':
+        form = ExpenseForm(request.POST, instance=expense)
+        if form.is_valid():
+            form.save()
+            return redirect('expense_list')
+    else:
+        form = ExpenseForm(instance=expense)
+    return render(request, 'expenses/expense_form.html', {'form': form, 'expense': expense})
+
+def expense_delete(request, pk):
+    expense = get_object_or_404(Expense, pk=pk)
+    if request.method == 'POST':
+        expense.delete()
+        return redirect('expense_list')
+    return render(request, 'expenses/expense_confirm_delete.html', {'expense': expense})

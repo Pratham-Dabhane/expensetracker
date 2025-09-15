@@ -1,0 +1,104 @@
+/* expenses/static/css/style.css */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+h1, h2 {
+    color: #1a252f;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.card h3 { margin-top: 0; color: #555; }
+.card p { font-size: 1.8em; font-weight: bold; color: #007bff; margin-bottom: 0;}
+
+.btn, .btn-secondary, .btn-danger {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.btn { background-color: #007bff; }
+.btn-secondary { background-color: #6c757d; }
+.btn-danger { background-color: #dc3545; }
+
+.expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.expense-table th, .expense-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.expense-table th { background-color: #f8f9fa; }
+
+.category-tag {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    color: #fff;
+}
+.category-food { background-color: #ffc107; color:#333; }
+.category-transport { background-color: #17a2b8; }
+.category-bills { background-color: #fd7e14; }
+.category-entertainment { background-color: #6f42c1; }
+.category-other { background-color: #6c757d; }
+
+.action-link, .action-link-danger {
+    text-decoration: none;
+    margin-right: 10px;
+}
+.action-link { color: #007bff; }
+.action-link-danger { color: #dc3545; }
+
+.expense-form p { margin-bottom: 15px; }
+.expense-form input, .expense-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
