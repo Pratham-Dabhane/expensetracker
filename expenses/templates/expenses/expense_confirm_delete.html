@@ -1,11 +1,15 @@
 {% extends 'expenses/base.html' %}
 
 {% block content %}
-    <h2>Are you sure?</h2>
-    <p>You are about to permanently delete the expense: <strong>"{{ expense.title }}"</strong>.</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn-danger">Yes, Delete</button>
-        <a href="{% url 'expense_list' %}" class="btn-secondary">Cancel</a>
-    </form>
+    <div class="expense-form">
+        <h2>Are you sure?</h2>
+        <p>You are about to permanently delete the expense: <strong>"{{ expense.title }}"</strong> (Amount: ${{ expense.amount|floatformat:2 }}).</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-buttons">
+                <button type="submit" class="btn-danger">Yes, Delete</button>
+                <a href="{% url 'expense_list' %}" class="btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
 {% endblock %}
