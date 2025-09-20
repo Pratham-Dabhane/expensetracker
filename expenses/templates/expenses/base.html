@@ -14,13 +14,13 @@
                 <div class="logo-section">
                     <h1 class="site-title">ExpenseTracker</h1>
                 </div>
-                <nav class="user-nav">
+                <div class="user-nav">
                     <span class="welcome-text">Welcome, {{ user.username }}</span>
                     <form method="post" action="{% url 'logout' %}" class="logout-form">
                         {% csrf_token %}
                         <button type="submit" class="logout-btn">Logout</button>
                     </form>
-                </nav>
+                </div>
             </div>
         </header>
     {% endif %}
