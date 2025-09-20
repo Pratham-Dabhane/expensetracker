@@ -8,8 +8,8 @@
 
     <div class="summary-cards">
         <div class="card">
-            <h3>Total (All Time)</h3>
-            <p>${{ total_expenses|floatformat:2 }}</p>
+            <h3>All Time Total</h3>
+            <p>${{ all_time_total|floatformat:2 }}</p>
         </div>
         <div class="card">
             <h3>Last 30 Days</h3>
@@ -21,7 +21,27 @@
         </div>
     </div>
 
-    <h2>All Expenses</h2>
+    <div class="filter-section">
+        <h2>Expenses for {{ current_month_name }}</h2>
+        <form method="post" class="month-filter-form">
+            {% csrf_token %}
+            <div class="filter-group">
+                <label for="month_filter">Filter by Month:</label>
+                <select name="month_filter" id="month_filter" onchange="this.form.submit()">
+                    <option value="">All Time</option>
+                    {% for option in month_options %}
+                        <option value="{{ option.value }}" {% if option.value == selected_month %}selected{% endif %}>
+                            {{ option.label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+        <div class="period-total">
+            <strong>Period Total: ${{ total_expenses|floatformat:2 }}</strong>
+        </div>
+    </div>
+
     <table class="expense-table">
         <thead>
             <tr>
@@ -46,7 +66,7 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5">No expenses logged yet.</td>
+                <td colspan="5">No expenses found for the selected period.</td>
             </tr>
             {% endfor %}
         </tbody>
