@@ -8,17 +8,24 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    {% if user.is_authenticated %}
+        <header class="top-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1 class="site-title">ExpenseTracker</h1>
+                </div>
+                <nav class="user-nav">
+                    <span class="welcome-text">Welcome, {{ user.username }}</span>
+                    <form method="post" action="{% url 'logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
+                </nav>
+            </div>
+        </header>
+    {% endif %}
+    
     <div class="container">
-        {% if user.is_authenticated %}
-            <nav class="user-nav">
-                <span class="welcome-text">Welcome, {{ user.username }}!</span>
-                <form method="post" action="{% url 'logout' %}" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="logout-link">Logout</button>
-                </form>
-            </nav>
-        {% endif %}
-        
         {% if messages %}
             <div class="messages">
                 {% for message in messages %}

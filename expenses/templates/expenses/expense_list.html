@@ -1,9 +1,15 @@
 {% extends 'expenses/base.html' %}
 
 {% block content %}
-    <header>
-        <h1>Expense Tracker 💸</h1>
-        <a href="{% url 'expense_create' %}" class="btn">Log New Expense</a>
+    <header class="page-header">
+        <div class="header-title">
+            <h1>💸 Your Expense Dashboard</h1>
+            <p class="subtitle">Track and manage your personal expenses</p>
+        </div>
+        <a href="{% url 'expense_create' %}" class="btn btn-primary">
+            <span class="btn-icon">+</span>
+            Add New Expense
+        </a>
     </header>
 
     <div class="summary-cards">
@@ -22,23 +28,38 @@
     </div>
 
     <div class="filter-section">
-        <h2>Expenses for {{ current_month_name }}</h2>
-        <form method="post" class="month-filter-form">
-            {% csrf_token %}
-            <div class="filter-group">
-                <label for="month_filter">Filter by Month:</label>
-                <select name="month_filter" id="month_filter" onchange="this.form.submit()">
-                    <option value="">All Time</option>
-                    {% for option in month_options %}
-                        <option value="{{ option.value }}" {% if option.value == selected_month %}selected{% endif %}>
-                            {{ option.label }}
-                        </option>
-                    {% endfor %}
-                </select>
+        <div class="filter-header">
+            <div class="filter-title">
+                <h2>📊 Expenses Overview</h2>
+                <p class="filter-subtitle">Analyze your spending patterns</p>
             </div>
-        </form>
-        <div class="period-total">
-            <strong>Period Total: ${{ total_expenses|floatformat:2 }}</strong>
+        </div>
+        
+        <div class="filter-controls">
+            <form method="post" class="month-filter-form">
+                {% csrf_token %}
+                <div class="filter-input-group">
+                    <label for="month_filter" class="filter-label">
+                        <span class="label-icon">📅</span>
+                        Filter by Period
+                    </label>
+                    <div class="select-wrapper">
+                        <select name="month_filter" id="month_filter" class="custom-select" onchange="this.form.submit()">
+                            <option value="">All Time</option>
+                            {% for option in month_options %}
+                                <option value="{{ option.value }}" {% if option.value == selected_month %}selected{% endif %}>
+                                    {{ option.label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </form>
+            
+            <div class="period-total-card">
+                <div class="total-label">Period Total</div>
+                <div class="total-amount">${{ total_expenses|floatformat:2 }}</div>
+            </div>
         </div>
     </div>
 
